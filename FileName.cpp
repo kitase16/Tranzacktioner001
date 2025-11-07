@@ -8,11 +8,24 @@
 //	T value = T();
 //};
 
+
+//#define_DebugF==0 way is crashed...:p.
+
+#define DebugF 1
+
+#if DebugF
 template<class T>
+#else
+#include <vector>
+template<class T,class Conatiner = std::list<T>>
+#endif
 class DataIO {
 public:
-
+#if DebugF
 	DataIO(const std::initializer_list<T>& L) {
+#else
+	DataIO(const std::initializer_list<std::list<T>>& L){
+#endif
 		Data.insert(Data.begin(),L.begin(), L.end());
 	}
 	void Craft(std::size_t N, auto mk) {//double craft.
@@ -114,12 +127,17 @@ public:
 	}
 
 protected:
+#if DebugF
 	std::list<T> Data;
+#else
+	Conatiner Data;
+#endif
 };
 
 #include <string>
 
 int main() {
+#if DebugF
 	DataIO<std::string> D = {"1","2","3"};
 
 	D.Auto([](auto o) {std::cout << o << std::endl; });
@@ -129,6 +147,19 @@ int main() {
 	D.Auto([&](auto& o) { X += o.size(); });
 
 	std::cout << X << std::endl;
+#else
+	DataIO < std::string, std::list<std::vector<std::string>>> D = { {{"1","2"},{"2"},{"3"}}, };
+
+	D.Auto([](auto o) {for (auto oo : o) { std::cout << oo << std::endl; }});
+	//D.Craft(16, [](auto l) {std::string s; for (auto& o : l) { o.push_back("0"); s += o[0]; s += "x"; }; return s; });
+	D.Auto([](auto o) {for (auto oo : o) { std::cout << oo << std::endl; }});
+	std::size_t X = 0;
+	//D.Auto([&](auto& o) { X += o[0].size(); });
+
+	std::cout << X << std::endl;
+#endif
+
+
 
 	return 0;
 }
