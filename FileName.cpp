@@ -72,6 +72,10 @@ public:
 		return lf(it);
 	}
 
+	auto One(auto F) {
+		return F(this, Data);
+	}
+
 	bool Erase(auto lf) {
 		auto it = Data.begin();
 		for (size_t i = 0; i < Data.size(); i++) {
