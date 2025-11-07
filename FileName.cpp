@@ -106,6 +106,12 @@ public:
 	auto End() {
 		return Data.end();
 	}
+	auto rBegin() {
+		return Data.rbegin();
+	}
+	auto rEnd() {
+		return Data.rend();
+	}
 
 protected:
 	std::list<T> Data;
