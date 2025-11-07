@@ -49,6 +49,13 @@ public:
 			F(o);
 		}
 	}
+
+	void Lambad(auto F) {
+		for (auto& o: Data) {
+			F(o);
+		}
+	}
+
 	void IF(auto IF, auto F) {
 		for (auto& o : Data) {
 			if (IF(o)) { F(o); }
@@ -108,7 +115,10 @@ int main() {
 	D.Auto([](auto o) {std::cout << o << std::endl; });
 	D.Craft(16, [](auto l) {std::string s; for (auto& o : l) { s += o; s += "x"; }; return s; });
 	D.Auto([](auto o) {std::cout << o << std::endl; });
+	std::size_t X = 0;
+	D.Auto([&](auto& o) { X += o.size(); });
 
+	std::cout << X << std::endl;
 
 	return 0;
 }
