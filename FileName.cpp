@@ -110,5 +110,5 @@ int main() {
 	D.Auto([](auto o) {std::cout << o << std::endl; });
 
 
-
+	return 0;
 }

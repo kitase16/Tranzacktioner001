@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Tranzacktioner001.vcxproj" />
+  <Project Path="Tranzacktioner001.vcxproj" Id="83ca88a1-9212-4dc8-95e9-cf0b7dad3562" />
 </Solution>
